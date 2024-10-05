@@ -6,6 +6,7 @@ import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import importPlugin from 'eslint-plugin-import';
+import checkFile from 'eslint-plugin-check-file';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -25,6 +26,7 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSort,
       import: importPlugin,
+      'check-file': checkFile,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -44,6 +46,21 @@ export default tseslint.config(
           args: 'after-used',
           ignoreRestSiblings: true,
           argsIgnorePattern: '^_',
+        },
+      ],
+      'check-file/filename-naming-convention': [
+        'error',
+        {
+          '**/*.{ts,tsx}': 'KEBAB_CASE',
+        },
+        {
+          ignoreMiddleExtensions: true,
+        },
+      ],
+      'check-file/folder-naming-convention': [
+        'error',
+        {
+          'src/**/!(__tests__)': 'KEBAB_CASE',
         },
       ],
     },
