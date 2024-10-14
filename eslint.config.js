@@ -7,9 +7,10 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import importPlugin from 'eslint-plugin-import';
 import checkFile from 'eslint-plugin-check-file';
+import eslintQuery from '@tanstack/eslint-plugin-query';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'src/components/ui/*'] },
   {
     extends: [
       js.configs.recommended,
@@ -27,6 +28,7 @@ export default tseslint.config(
       'simple-import-sort': simpleImportSort,
       import: importPlugin,
       'check-file': checkFile,
+      query: eslintQuery,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
