@@ -1,4 +1,5 @@
 import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from 'react-router-dom';
 
 import { Toaster } from '@/components';
@@ -11,6 +12,7 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={appRouter} />
       <Toaster />
+      {import.meta.env.DEV && <ReactQueryDevtools />}
     </QueryClientProvider>
   );
 };

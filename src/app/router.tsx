@@ -2,7 +2,14 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ProtectedRouter } from '@/components';
 
-import { AuthRoute, HomeRoute, LoginRoute, RegisterRoute } from './routes';
+import {
+  AuthRoute,
+  HomeRoute,
+  LoginRoute,
+  RegisterRoute,
+  RoomRoute,
+  RoomsRoute,
+} from './routes';
 
 export const appRouter = createBrowserRouter([
   {
@@ -12,6 +19,20 @@ export const appRouter = createBrowserRouter([
         <HomeRoute />
       </ProtectedRouter>
     ),
+  },
+  {
+    path: 'rooms',
+    element: (
+      <ProtectedRouter>
+        <RoomsRoute />
+      </ProtectedRouter>
+    ),
+    children: [
+      {
+        path: ':roomId',
+        element: <RoomRoute />,
+      },
+    ],
   },
   {
     path: 'auth',

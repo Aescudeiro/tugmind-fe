@@ -1,15 +1,15 @@
-import Axios, { InternalAxiosRequestConfig } from 'axios';
+import Axios, { AxiosHeaders, InternalAxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
 import { env } from '@/config';
 import { useAuthStore } from '@/features';
 
 const authRequestInterceptor = (config: InternalAxiosRequestConfig) => {
-  if (config.headers) {
-    config.headers.Accept = 'application/json';
-  }
+  const token = useAuthStore.getState().user?.accessToken;
 
-  config.withCredentials = true;
+  config.headers = new AxiosHeaders({
+    Authorization: `Bearer ${token}`,
+  });
 
   return config;
 };
@@ -21,13 +21,7 @@ export const apiClient = Axios.create({
 apiClient.interceptors.request.use(authRequestInterceptor);
 
 apiClient.interceptors.response.use(
-  (config) => {
-    const token = useAuthStore.getState().user?.accessToken;
-
-    config.headers = { Authoriztion: `Bearer ${token}` };
-
-    return config;
-  },
+  (response) => response,
   (error) => {
     const message = error.response?.data?.message || error.message;
 

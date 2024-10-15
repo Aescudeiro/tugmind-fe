@@ -1,11 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { apiClient } from '@/lib';
-
-import { RegisterFormValues } from '../components';
+import { api } from '@/api';
 
 export const useRegister = () =>
   useMutation({
-    mutationFn: async (data: RegisterFormValues) =>
-      await apiClient.post('/auth/register', data).then((res) => res.data),
+    mutationFn: api.auth.register,
   });

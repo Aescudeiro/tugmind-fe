@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
   AppLayout,
   Button,
@@ -9,6 +11,12 @@ import { useAuthStore } from '@/features';
 
 export const HomeRoute = () => {
   const { user } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleClickPlay = () => {
+    navigate('/rooms', { replace: true });
+  };
+
   return (
     <AppLayout>
       <Card className="max-w-2xl mx-auto">
@@ -24,6 +32,7 @@ export const HomeRoute = () => {
             <Button
               size="lg"
               className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
+              onClick={handleClickPlay}
             >
               Play
             </Button>

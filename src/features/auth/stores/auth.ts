@@ -16,7 +16,6 @@ export const useAuthStore = create<AuthStore & AuthStoreActions>()(
   persist(
     (set) => ({
       user: null,
-      accessToken: '',
       setUser: (user) => set({ user }),
       removeUser: () => set({ user: null }),
     }),
