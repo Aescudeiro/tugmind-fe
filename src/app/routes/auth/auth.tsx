@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -29,6 +29,10 @@ export const AuthRoute = () => {
       replace: true,
     });
   };
+
+  useEffect(() => {
+    setActiveTab(location.pathname.split('/').pop() || 'login');
+  }, [location.pathname]);
 
   return (
     <AuthLayout>
